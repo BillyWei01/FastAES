@@ -16,27 +16,17 @@ extern "C"
 JNIEXPORT jbyteArray JNICALL
 Java_io_github_fastaes_FastAES_crypt(JNIEnv *env, jclass clazz, jbyteArray input, jbyteArray key,
                                      jbyteArray iv, jboolean is_encrypt) {
-    if (key == nullptr) {
-        throwIllegalArgumentException(env, "key is null");
-        return nullptr;
-    }
-    int keyLen = env->GetArrayLength(key);
-    if (keyLen != 16 && keyLen != 32) {
-        throwIllegalArgumentException(env, "Only support the key with 16/32 bytes");
-        return nullptr;
-    }
-    if (iv == nullptr || env->GetArrayLength(iv) != 16) {
-        throwIllegalArgumentException(env, "iv's length must be 16");
-        return nullptr;
-    }
-
-    if (input == nullptr) {
+    // Java层其实校验了参数，这里再check一下
+    if (input == nullptr || key == nullptr || iv == nullptr) {
+        throwIllegalArgumentException(env, "Illegal argument");
         return nullptr;
     }
 
     int inputLen = env->GetArrayLength(input);
-    if (!is_encrypt && (inputLen < 16 || ((inputLen & 15) != 0))) {
-        throwIllegalArgumentException(env, "Illegal block size");
+    int keyLen = env->GetArrayLength(key);
+
+    if ((keyLen != 16 && keyLen != 32)) {
+        throwIllegalArgumentException(env, "Illegal argument");
         return nullptr;
     }
 
@@ -88,13 +78,17 @@ Java_io_github_fastaes_FastAES_crypt(JNIEnv *env, jclass clazz, jbyteArray input
         }
         return result;
     } else {
+        // 加解密失败，除了解密可能会Bad Padding之外，就剩下内存不足了
         if (is_encrypt) {
-            throwIllegalStateException(env, "encrypt failed");
+            // 内存不足，加密失败
+            throwIllegalStateException(env, "Encrypt failed");
         } else {
             if (cipher.len == 0) {
-                throwIllegalStateException(env, "decrypt failed");
+                // 内存不足，解密失败
+                throwIllegalStateException(env, "Decrypt failed");
             } else {
-                throwIllegalArgumentException(env, "Bad padding");
+                // input的padding模式不是PKCS7Padding
+                env->ThrowNew(env->FindClass("javax/crypto/BadPaddingException"), "Bad padding");
             }
         }
         return nullptr;

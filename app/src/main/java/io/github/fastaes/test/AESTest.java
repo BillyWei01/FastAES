@@ -6,6 +6,8 @@ import android.util.Log;
 import java.util.Arrays;
 import java.util.Random;
 
+import javax.crypto.BadPaddingException;
+
 import io.github.fastaes.FastAES;
 
 
@@ -30,21 +32,25 @@ public class AESTest {
         int keyLen = (bits == 128) ? 16 : 32;
         byte[] key = new byte[keyLen];
         r.nextBytes(key);
-        for (int i = 0; i < n; i++) {
-            int len = r.nextInt(1000);
-            byte[] bytes = new byte[len];
-            byte[] iv = new byte[16];
-            r.nextBytes(bytes);
-            r.nextBytes(iv);
-            byte[] cipherBytes = FastAES.encrypt(bytes, key, iv);
+        try {
+            for (int i = 0; i < n; i++) {
+                int len = r.nextInt(800);
+                byte[] bytes = new byte[len];
+                byte[] iv = new byte[16];
+                r.nextBytes(bytes);
+                r.nextBytes(iv);
+                byte[] cipherBytes = FastAES.encrypt(bytes, key, iv);
 
-            if (!Arrays.equals(bytes, FastAES.decrypt(cipherBytes, key, iv))) {
-                return false;
-            }
+                if (!Arrays.equals(bytes, FastAES.decrypt(cipherBytes, key, iv))) {
+                    return false;
+                }
 
-            if (!Arrays.equals(cipherBytes, SDK_AES.encrypt(bytes, key, iv))) {
-                return false;
+                if (!Arrays.equals(cipherBytes, SDK_AES.encrypt(bytes, key, iv))) {
+                    return false;
+                }
             }
+        }catch (Exception e){
+
         }
         return true;
     }

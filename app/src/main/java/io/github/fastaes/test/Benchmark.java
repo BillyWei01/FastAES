@@ -5,6 +5,8 @@ import android.os.Build;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.crypto.BadPaddingException;
+
 import io.github.fastaes.FastAES;
 
 public class Benchmark {
@@ -12,7 +14,7 @@ public class Benchmark {
         void onResult(String result);
     }
 
-    public static void start(Callback callback) {
+    public static void start(Callback callback) throws BadPaddingException {
         Random r = new Random();
         int n = 500;
 

@@ -17,9 +17,9 @@ OPENSSL提供了几种AES的实现，本项目取其中的查表的实现，并�
 
 |              | 耗时(ms) 
 --------------|---
- FastAES      | 1  
+FastAES      | 1  
 SDK AES      | 24 
- KeyStore AES | 20036
+KeyStore AES | 20036
 
 
 额外提一下，如果要使用KeyStore，建议选用其HMAC算法（Android 6.0以上可用）加密一段固定数组，所的结果作为AES的key。<br>
@@ -31,7 +31,7 @@ SDK AES      | 24
 
 ```gradle
 dependencies {
-    implementation 'io.github.billywei01:fastaes:1.1.0'
+    implementation 'io.github.billywei01:fastaes:1.1.2'
 }
 ```
 

@@ -8,8 +8,8 @@ ByteArray aes_cbc_encrypt(ByteArray *key, uint8_t *iv, ByteArray *plain, uint8_t
     uint8_t *plaintext = plain->value;
     int len = plain->len;
 
-    AES_KEY aes_key;
-    AES_set_encrypt_key(key->value, key->len << 3, &aes_key);
+    AES_KEY extended_key;
+    AES_set_encrypt_key(key->value, key->len << 3, &extended_key);
 
     int padding = AES_BLOCK_SIZE - (len & 0xF);
     int cipher_len = len + padding;
@@ -25,7 +25,7 @@ ByteArray aes_cbc_encrypt(ByteArray *key, uint8_t *iv, ByteArray *plain, uint8_t
             p_text[0] ^= p_iv[0];
             p_text[1] ^= p_iv[1];
             iv = p;
-            AES_encrypt(p, p, &aes_key);
+            AES_encrypt(p, p, &extended_key);
         }
     }
     ByteArray result;
@@ -50,13 +50,13 @@ ByteArray aes_cbc_decrypt(ByteArray *key, uint8_t *iv, ByteArray *cipher, uint8_
         return result;
     }
 
-    AES_KEY aes_key;
-    AES_set_decrypt_key(key->value, key->len << 3, &aes_key);
+    AES_KEY extended_key;
+    AES_set_decrypt_key(key->value, key->len << 3, &extended_key);
 
     uint8_t *end = ciphertext + len;
     for (uint8_t *p = ciphertext; p < end; p += AES_BLOCK_SIZE) {
         uint8_t *pt = plaintext + (p - ciphertext);
-        AES_decrypt(p, pt, &aes_key);
+        AES_decrypt(p, pt, &extended_key);
         uint64_t *p_text = (uint64_t *) pt;
         uint64_t *p_iv = (uint64_t *) iv;
         p_text[0] ^= p_iv[0];

@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-#define BUFFER_SIZE 256
+#define BUFFER_SIZE 512
 
 ByteArray aes_cbc_encrypt(ByteArray *key, uint8_t *iv, ByteArray *plain, uint8_t* out_buffer);
 
