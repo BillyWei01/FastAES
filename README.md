@@ -2,7 +2,9 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.billywei01/fastaes)](https://search.maven.org/artifact/io.github.billywei01/fastaes)
 
 ## 1. 概述
-FastAES是基于Android平台的AES快速加解密库。<br>
+FastAES是基于Android平台的AES加解密库。<br>
+
+其加解密速度比Android SDK提供的实现要快一个数量级。
 
 加解密核心部分来源于：OPENSSL <br>
 [https://github.com/openssl/openssl/blob/master/crypto/aes/aes_core.c](https://github.com/openssl/openssl/blob/master/crypto/aes/aes_core.c)
@@ -29,16 +31,18 @@ SDK AES      | 24
 
 ```gradle
 dependencies {
-    implementation 'io.github.billywei01:fastaes:1.0.1'
+    implementation 'io.github.billywei01:fastaes:1.1.0'
 }
 ```
 
-### 2.2 加解密
+目前aar包只编译了 'armeabi-v7a', 'arm64-v8a' 两种abi架构。 <br>
+如果需更多架构可以自行下载源码编译，或者联系我添加。
+
+### 2.2 使用
 ```java
     byte[] cipher = FastAES.encrypt(data, key, iv);
     byte[] plain = FastAES.decrypt(cipher, key, iv);
 ```
-
 
 ## License
 See the [LICENSE](LICENSE) file for license rights and limitations.
