@@ -2,7 +2,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.billywei01/fastaes)](https://search.maven.org/artifact/io.github.billywei01/fastaes)
 
 ## 1. 概述
-FastAES是基于Android平台的AES加解密库。<br>
+FastAES是基于Android平台的AES加解密实现。<br>
 
 其加解密速度比Android SDK提供的实现要快一个数量级。
 
