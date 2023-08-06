@@ -1,4 +1,4 @@
-# FastKV
+# FastAES
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.billywei01/fastaes)](https://search.maven.org/artifact/io.github.billywei01/fastaes)
 
 ## 1. 概述
@@ -52,7 +52,7 @@ dependencies {
 https://juejin.cn/spost/7263784662698754103
 
 用例：
-https://github.com/BillyWei01/FastAES
+https://github.com/BillyWei01/FastKV
 
 更多加密的实现：
 https://github.com/BillyWei01/EasyCipher
