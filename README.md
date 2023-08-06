@@ -52,10 +52,10 @@ dependencies {
 https://juejin.cn/spost/7263784662698754103
 
 用例：
-https://github.com/BillyWei01/FastKV
+[FastKV-AESCipher](https://github.com/BillyWei01/FastKV/blob/main/app/src/main/java/io/fastkv/fastkvdemo/fastkv/cipher/AESCipher.java)
 
 更多加密的实现：
-https://github.com/BillyWei01/EasyCipher
+[EasyCipher](https://github.com/BillyWei01/EasyCipher)
 
 ## License
 See the [LICENSE](LICENSE) file for license rights and limitations.
