@@ -34,12 +34,9 @@ KeyStore AES | 20036
 
 ```gradle
 dependencies {
-    implementation 'io.github.billywei01:fastaes:1.1.2'
+    implementation 'io.github.billywei01:fastaes:1.1.3'
 }
 ```
-
-目前aar包只编译了 'armeabi-v7a', 'arm64-v8a' 两种abi架构。 <br>
-如果需更多架构可以自行下载源码编译，或者联系我添加。
 
 ### 2.2 使用
 ```java

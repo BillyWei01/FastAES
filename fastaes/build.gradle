@@ -10,11 +10,11 @@ android {
         minSdk 21
         targetSdk 33
 
-        ndk {
-            // choose your abi filter
-            // abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-            abiFilters 'armeabi-v7a', 'arm64-v8a'
-        }
+//        ndk {
+//           // choose your abi filter
+//           // abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+//           // abiFilters 'armeabi-v7a', 'arm64-v8a'
+//        }
     }
 
     buildTypes {
