@@ -1,7 +1,6 @@
 package io.github.fastaes;
 
 import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
 
 public class FastAES {
     static {

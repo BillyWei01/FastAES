@@ -59,31 +59,31 @@ Java_io_github_fastaes_FastAES_crypt(JNIEnv *env, jclass clazz, jbyteArray input
     aesKey.value = (uint8_t *) p_key;
     aesKey.len = keyLen;
 
-    ByteArray cipher;
+    ByteArray result;
     if (is_encrypt) {
-        cipher = aes_cbc_encrypt(&aesKey, (uint8_t *) p_iv, &content, out_buffer);
+        result = aes_cbc_encrypt(&aesKey, (uint8_t *) p_iv, &content, out_buffer);
     } else {
-        cipher = aes_cbc_decrypt(&aesKey, (uint8_t *) p_iv, &content, out_buffer);
+        result = aes_cbc_decrypt(&aesKey, (uint8_t *) p_iv, &content, out_buffer);
     }
 
     if (p_input != in_buffer) {
         env->ReleaseByteArrayElements(input, p_input, 0);
     }
 
-    if (cipher.value != nullptr) {
-        jbyteArray result = env->NewByteArray(cipher.len);
-        env->SetByteArrayRegion(result, 0, cipher.len, (jbyte *) cipher.value);
-        if (cipher.value != out_buffer) {
-            free(cipher.value);
+    if (result.value != nullptr) {
+        jbyteArray output = env->NewByteArray(result.len);
+        env->SetByteArrayRegion(output, 0, result.len, (jbyte *) result.value);
+        if (result.value != out_buffer) {
+            free(result.value);
         }
-        return result;
+        return output;
     } else {
         // 加解密失败，除了解密可能会Bad Padding之外，就剩下内存不足了
         if (is_encrypt) {
             // 内存不足，加密失败
             throwIllegalStateException(env, "Encrypt failed");
         } else {
-            if (cipher.len == 0) {
+            if (result.len == 0) {
                 // 内存不足，解密失败
                 throwIllegalStateException(env, "Decrypt failed");
             } else {
