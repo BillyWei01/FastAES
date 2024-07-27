@@ -34,7 +34,7 @@ KeyStore AES | 20036
 
 ```gradle
 dependencies {
-    implementation 'io.github.billywei01:fastaes:1.1.3'
+    implementation 'io.github.billywei01:fastaes:1.1.5'
 }
 ```
 
