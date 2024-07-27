@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'io.github.fastaes'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "io.github.fastaes"
         minSdk 21
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -18,7 +18,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -26,12 +27,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-//    externalNativeBuild {
-//        cmake {
-//            path file('src/main/cpp/CMakeLists.txt')
-//            version '3.22.1'
-//        }
-//    }
+
     buildFeatures {
         viewBinding true
     }
