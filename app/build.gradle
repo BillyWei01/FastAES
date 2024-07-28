@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'io.github.fastaes'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "io.github.fastaes"
         minSdk 21
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
