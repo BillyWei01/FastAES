@@ -11,7 +11,7 @@ FastAES是基于Android平台的AES加解密实现。<br>
 
 OPENSSL提供了几种AES的实现，本项目取其中的查表的实现，并封装了AES/CBC/PKCS7Padding模式。<br>
 和Android SDK的AES实现对比，要快一个数量级。<br>
-同时测试了一下KeyStore提供的AES加解密，慢的离谱。
+同时测试了一下KeyStore提供的AES加解密，KeyStore的运算慢的离谱。
 
 下面是测试情况。<br>
 测试数据：1000个长度在100字节以内的随机数组。<br>
